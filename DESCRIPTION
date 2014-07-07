@@ -1,6 +1,7 @@
 Package: reurostat
 Title: reurostat
-Description: 
+Description: The package hosts a list of functions to download, manipulate, 
+construct and aggregate statistics provided by EUROSTAT.
 Version: 0.1
 Authors: getOptions('devtools.desc.author')
 Depends:

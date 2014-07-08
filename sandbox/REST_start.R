@@ -8,6 +8,11 @@ u = "http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/ei_naag_q/Q..TOTAL.NA-
 # We need to specify the User-Agent, otherwise the request will be denied
 db = getURI(u, httpheader=list('User-Agent'='R')) 
 
-# Parse the result as xm
-doc = xmlParse(db,asText=T)
-doc
+# Parse the result as xml
+data <-  xmlParse(db,asText=T)
+
+#convert xml to list
+xml_data <- xmlToList(doc)
+
+##http://technistas.com/2012/06/16/using-rest-apis-from-r-xml-operations/
+campaignDOM = xmlRoot(xmlTreeParse(db))

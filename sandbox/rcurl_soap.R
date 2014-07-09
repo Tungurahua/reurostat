@@ -16,6 +16,7 @@
 
 ################################################################################################
 library(RCurl)
+library(XML)
 ################################################################################################
 
 
@@ -23,7 +24,7 @@ library(RCurl)
 
 h = basicTextGatherer()
 
-body='<?xml version="1.0" encoding="UTF-8" ?>
+body='sandbox/example1.xml<?xml version="1.0" encoding="UTF-8" ?>
   <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
     xmlns:web="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/webservices"
     xmlns:mes="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/message"
@@ -68,4 +69,8 @@ curlPerform(url="http://ec.europa.eu/eurostat/SDMX/diss-ws/SdmxServiceService",
 
 body=h$value()
 
+# unformatted body
+body
+
 # ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+

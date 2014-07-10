@@ -6,7 +6,7 @@
 
 #       Created: Saturday 05 July 2014 21:38:26 CEST
 
-#       Last modified: Tuesday 08 July 2014 10:30:28 CEST
+#       Last modified: Thursday 10 July 2014 00:56:10 CEST
 
 ################################################################################################
 
@@ -16,56 +16,36 @@
 
 ################################################################################################
 library(RCurl)
+library(XML)
 ################################################################################################
 
-
-# GetDataflow for the list of available datasets from EU stat example
-
-h = basicTextGatherer()
-
-body='<?xml version="1.0" encoding="UTF-8" ?>
-  <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-    xmlns:web="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/webservices"
-    xmlns:mes="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/message"
-    xmlns:com="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/common"
-    xmlns:quer="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/query">
-    <soapenv:Header/>
-    <soapenv:Body>
-      <web:GetDataflow>
-        <mes:DataflowQuery>
-          <mes:Header>
-            <mes:ID>QUERY</mes:ID>
-            <mes:Test>false</mes:Test>
-            <mes:Prepared>2012-09-14</mes:Prepared>
-            <mes:Sender id="SENDER"/>
-            <mes:Receiver id="RECEIVER"/>
-          </mes:Header>
-          <mes:Query>
-            <quer:ReturnDetails detail="Full" returnMatchedArtefact="true">
-              <quer:References processConstraints="false" detail="Full">
-                <quer:None/>
-              </quer:References>
-            </quer:ReturnDetails>
-            <quer:DataflowWhere/>
-          </mes:Query>
-        </mes:DataflowQuery>
-      </web:GetDataflow>
-    </soapenv:Body>\n'
-
-
+doc=paste(readLines("get_data_flow.xml"), "\n", collapse="")
+doc=paste(readLines("get_data_structure.xml"), "\n", collapse="")
+doc=paste(readLines("get_generic_data.xml"), "\n", collapse="")
 
 # SOAP request
+h = basicTextGatherer()
 h$reset()
 # curlPerform(url="http://www.ec.europa.eu/",
 curlPerform(url="http://ec.europa.eu/eurostat/SDMX/diss-ws/SdmxServiceService",
       httpheader=c(Accept="text/xml", Accept="multipart/*",
-		    SOAPAction='GetDataflow',
-		   'Content-Type' = "text/xml; charset=utf-8",'User-Agent'='R'),
-      postfields=body,
+		# SOAPAction='GetDataflow',
+		# SOAPAction='GetDataStructure',
+		# SOAPAction='GetGenericData',
+		'Content-Type' = "text/xml; charset=utf-8",'User-Agent'='TEST'),
+      postfields=doc,
       writefunction = h$update,
       verbose = TRUE
      )
-
 body=h$value()
+
+showConnections(all = T)
+closeAllConnections()
+
+
+
+test_1=xmlParse(body)
+test_2=xmlParse(body)
+
 
 # ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''

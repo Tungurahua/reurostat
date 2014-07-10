@@ -1,30 +1,30 @@
-<?xml version="1.0" encoding="UTF-8" ?> 
-  <soapenv:Envelope
-    xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+<?xml version="1.0" encoding="UTF-8"?>
+  <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
     xmlns:web="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/webservices"
     xmlns:mes="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/message"
     xmlns:com="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/common"
     xmlns:quer="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/query">
     <soapenv:Header/>
     <soapenv:Body>
-      <web:GetDataStructure>
-        <mes:DataStructureQuery>
+      <web:GetDataflow>
+        <mes:DataflowQuery>
           <mes:Header>
-            <mes:ID>MESSAGE_ID</mes:ID>
+            <mes:ID>QUERY</mes:ID>
             <mes:Test>false</mes:Test>
-            <mes:Prepared>2013-04-08</mes:Prepared>
+            <mes:Prepared>2012-09-14</mes:Prepared>
             <mes:Sender id="SENDER"/>
-            <mes:Receiver id="ESTAT"/>
+            <mes:Receiver id="RECEIVER"/>
           </mes:Header>
           <mes:Query>
-            <quer:ReturnDetails>
-              <quer:References>
-                <quer:All/>
+            <quer:ReturnDetails detail="Full" returnMatchedArtefact="true">
+              <quer:References processConstraints="false" detail="Full">
+                <quer:None/>
               </quer:References>
             </quer:ReturnDetails>
-            <quer:ID>DSD_cens_01nactz</quer:ID>
+            <quer:DataflowWhere/>
           </mes:Query>
-        </mes:DataStructureQuery>
-      </web:GetDataStructure>
+        </mes:DataflowQuery>
+      </web:GetDataflow>
     </soapenv:Body>
-  </soapenv:Envelope> 
+  </soapenv:Envelope>
+

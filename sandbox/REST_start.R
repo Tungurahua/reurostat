@@ -12,20 +12,24 @@ library(XML)
 # URL to download
 u1 <- "http://ec.europa.eu/eurostat/SDMX/diss-web/rest/dataflow/ESTAT/all/latest" 
 
-doc1 <- getURL(u1,httpheader=list('User-Agent'='R'))
+doc<-getURL(u1,httpheader=list('User-Agent'='R'), .encoding='UTF-8')
 
-<<<<<<< HEAD
-docxml1 <- xmlParse(doc1)
-docxml1
-=======
-<<<<<<< HEAD
-docxml1 <- xmlParse(doc1)
-docxml1
-=======
-docxml <- xmlParse(doc1)
-docxml
->>>>>>> de46c7a1103d59fb2b31df9d71c1ff738f893692
->>>>>>> c5ed9ebc4577b54a2204353dd285b77b2035460a
+docxml<-xmlParse(doc, asTree=T, addAttributeNamespaces=T, useInternalNodes=T,
+			     fullNamespaceInfo=T, encoding="UTF-8")
+
+# Get all long german descriptions
+test=getNodeSet(docxml, "//str:Dataflow/com:Name [@xml:lang='de']")
+
+# Get all long descriptions
+test=getNodeSet(docxml, "//str:Dataflow/com:Name [@xml:lang]")
+
+# Get the attributes of those descriptions
+sapply(test, function(temp) xmlGetAttr(temp, "xml:lang"))
+
+
+
+getNodeSet(docxml, namespaces = xmlNamespaceDefinitions(doc, simplify = TRUE), 
+                    fun = NULL)
 
 ## Datastructure for a dataset structure definition (DSD)
 u2 <- "http://ec.europa.eu/eurostat/SDMX/diss-web/rest/datastructure/ESTAT/DSD_nama_gdp_c" 

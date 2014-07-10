@@ -14,22 +14,52 @@ u1 <- "http://ec.europa.eu/eurostat/SDMX/diss-web/rest/dataflow/ESTAT/all/latest
 
 doc1 <- getURL(u1,httpheader=list('User-Agent'='R'))
 
+<<<<<<< HEAD
 docxml1 <- xmlParse(doc1)
 docxml1
+=======
+<<<<<<< HEAD
+docxml1 <- xmlParse(doc1)
+docxml1
+=======
+docxml <- xmlParse(doc1)
+docxml
+>>>>>>> de46c7a1103d59fb2b31df9d71c1ff738f893692
+>>>>>>> c5ed9ebc4577b54a2204353dd285b77b2035460a
 
 ## Datastructure for a dataset structure definition (DSD)
 u2 <- "http://ec.europa.eu/eurostat/SDMX/diss-web/rest/datastructure/ESTAT/DSD_nama_gdp_c" 
 
 doc2 <- getURL(u2,httpheader=list('User-Agent'='R'))
+<<<<<<< HEAD
 docxml2 <- xmlParse(doc2)
 docxml2
+=======
+<<<<<<< HEAD
+docxml2 <- xmlParse(doc2)
+docxml2
+=======
+docxml <- xmlParse(doc2)
+docxml
+>>>>>>> de46c7a1103d59fb2b31df9d71c1ff738f893692
+>>>>>>> c5ed9ebc4577b54a2204353dd285b77b2035460a
 
 ## retrieving data
 u3 <- "http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/cdh_e_fos/..PC.FOS1.BE/?startperiod=2005&endPeriod=2011" 
 
 doc3 <- getURL(u3,httpheader=list('User-Agent'='R'))
+<<<<<<< HEAD
 docxml <- xmlParse(doc3)
 docxml
+=======
+<<<<<<< HEAD
+docxml3 <- xmlParse(doc3)
+docxml3
+=======
+docxml <- xmlParse(doc3)
+docxml
+>>>>>>> de46c7a1103d59fb2b31df9d71c1ff738f893692
+>>>>>>> c5ed9ebc4577b54a2204353dd285b77b2035460a
 
 
 

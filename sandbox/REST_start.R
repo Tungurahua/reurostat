@@ -1,41 +1,54 @@
 library(RCurl)
 library(XML)
+library(plyr)
+library(dplyr)
 
 # This script implements the example REST calls from the Eurostat website
 #
 # http://epp.eurostat.ec.europa.eu/portal/page/portal/sdmx_web_services/getting_started/rest_sdmx_2.1#ind_20_1
-#
-# !! If a HTML redirect message is returned, you probably need to strip the 
-# "www" from the beginning of the URL
 
-## Dataflow of available datasets
-# URL to download
-u1 <- "http://ec.europa.eu/eurostat/SDMX/diss-web/rest/dataflow/ESTAT/all/latest" 
+fetch_eustat_dataflow=function(){
+		## Dataflow of available datasets
+		# URL to download
+		u1="http://ec.europa.eu/eurostat/SDMX/diss-web/rest/dataflow/ESTAT/all/latest" 
 
-doc<-getURL(u1,httpheader=list('User-Agent'='R'), .encoding='UTF-8')
+		doc=getURL(u1,httpheader=list('User-Agent'='R'), .encoding='UTF-8')
 
-docxml<-xmlParse(doc, asTree=T, addAttributeNamespaces=T, useInternalNodes=T,
-			     fullNamespaceInfo=T, encoding="UTF-8")
+		docxml<-xmlParse(doc, asTree=T, addAttributeNamespaces=T, useInternalNodes=T,
+						 fullNamespaceInfo=T, encoding="UTF-8")
+		return(docxml)
+}
 
-# Get all long german descriptions
-test=getNodeSet(docxml, "//str:Dataflow/com:Name [@xml:lang='de']")
-
-
-# Get the ids attributes of those descriptions
-temp=getNodeSet(docxml, "//str:Dataflow [@id]")
-ids=sapply(temp, function(temp) xmlGetAttr(temp, "id"))
-
-# Get all long descriptions
-temp=getNodeSet(docxml, "//str:Dataflow/com:Name [@xml:lang]")
-descriptions=sapply(temp, function(x) xmlValue(x, "xml:lang"))
-language=sapply(temp, function(x) xmlValue(x))
+docxml=fetch_eustat_dataflow()
 
 
-test=getNodeSet(docxml, path="//str:Dataflow/com:Name [@xml:lang]",
-		   namespaces = xmlNamespaceDefinitions(docxml, simplify = TRUE))
+create_user_dataflow=function(lang, eurostat_data_flow){
+		descriptions=getNodeSet(docxml, paste0("//str:Dataflow/com:Name [@xml:lang=", lang, "]")) %>%
+		sapply(.,  xmlValue)
 
-a=xmlSApply(test, function(x) xmlSApply(x, xmlValue))
+		# Get the ids and attributes of those descriptions
+		ids=getNodeSet(docxml, "//str:Dataflow [@id]") %>%
+		sapply(., xmlGetAttr, "id")
 
+		# Get the associated references to fetch the data structure for a particular set
+		ref=getNodeSet(docxml, "//str:Dataflow/str:Structure/Ref [@id]") %>%
+		sapply(., xmlGetAttr, "id")
+
+		temp=data.frame(data_id=ids, data_description=descriptions, data_ref=ref)
+		return(temp)
+}
+
+languages=list('"de"', '"en"', '"fr"')
+
+eu_stat_ref=lapply(languages, create_user_dataflow)
+names(eu_stat_ref)=languages
+
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
 ## Datastructure for a dataset structure definition (DSD)

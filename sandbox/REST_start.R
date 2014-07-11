@@ -20,16 +20,23 @@ docxml<-xmlParse(doc, asTree=T, addAttributeNamespaces=T, useInternalNodes=T,
 # Get all long german descriptions
 test=getNodeSet(docxml, "//str:Dataflow/com:Name [@xml:lang='de']")
 
+
+# Get the ids attributes of those descriptions
+temp=getNodeSet(docxml, "//str:Dataflow [@id]")
+ids=sapply(temp, function(temp) xmlGetAttr(temp, "id"))
+
 # Get all long descriptions
-test=getNodeSet(docxml, "//str:Dataflow/com:Name [@xml:lang]")
-
-# Get the attributes of those descriptions
-sapply(test, function(temp) xmlGetAttr(temp, "xml:lang"))
-
+temp=getNodeSet(docxml, "//str:Dataflow/com:Name [@xml:lang]")
+descriptions=sapply(temp, function(x) xmlValue(x, "xml:lang"))
+language=sapply(temp, function(x) xmlValue(x))
 
 
-getNodeSet(docxml, namespaces = xmlNamespaceDefinitions(doc, simplify = TRUE), 
-                    fun = NULL)
+test=getNodeSet(docxml, path="//str:Dataflow/com:Name [@xml:lang]",
+		   namespaces = xmlNamespaceDefinitions(docxml, simplify = TRUE))
+
+a=xmlSApply(test, function(x) xmlSApply(x, xmlValue))
+
+
 
 ## Datastructure for a dataset structure definition (DSD)
 u2 <- "http://ec.europa.eu/eurostat/SDMX/diss-web/rest/datastructure/ESTAT/DSD_nama_gdp_c" 
@@ -50,3 +57,6 @@ docxml
 
 ##http://technistas.com/2012/06/16/using-rest-apis-from-r-xml-operations/
 #campaignDOM = xmlRoot(xmlTreeParse(db))
+
+
+

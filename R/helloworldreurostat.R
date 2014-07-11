@@ -9,4 +9,7 @@
 #' @examples
 #' helloreurostat(fname="Albrecht",lname="Gradmann")
 #' helloreurostat(fname="Stefan",lname="Luedtke")
-helloreurostat <- function(fname, lname){cat(paste0("Your name is", fname, lname, "\n"))}
+
+helloreurostat <- function(fname, lname){
+	cat(paste0("Your name is", fname, lname, "\n"))
+}

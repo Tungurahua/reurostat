@@ -1,9 +1,13 @@
 Package: reurostat
 Title: reurostat
-Description: 
+Description: functions to download, manipulate and aggregate statistics from
+    EUROSTAT.
 Version: 0.1
 Authors: getOptions('devtools.desc.author')
 Depends:
     R (>= 3.0.3)
+Imports:
+    RCurl,
+    XML
 License: # getOptions('devtools.desc.license')
 LazyData: true

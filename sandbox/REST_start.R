@@ -1,11 +1,15 @@
 library(RCurl)
 library(XML)
+<<<<<<< HEAD
 library(plyr)
 library(dplyr)
+=======
+>>>>>>> 949d62e9fc93e46690229291286d2c49799689e8
 
 # This script implements the example REST calls from the Eurostat website
 #
 # http://epp.eurostat.ec.europa.eu/portal/page/portal/sdmx_web_services/getting_started/rest_sdmx_2.1#ind_20_1
+<<<<<<< HEAD
 
 fetch_eustat_dataflow=function(){
 		## Dataflow of available datasets
@@ -49,6 +53,17 @@ names(eu_stat_ref)=languages
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+=======
+#
+# !! If a HTML redirect message is returned, you probably need to strip the 
+# "www" from the beginning of the URL
+
+## Dataflow of available datasets
+# URL to download
+u1 <- "http://ec.europa.eu/eurostat/SDMX/diss-web/rest/dataflow/ESTAT/all/latest" 
+
+doc1 <- getURL(u1,httpheader=list('User-Agent'='R'))
+>>>>>>> 949d62e9fc93e46690229291286d2c49799689e8
 
 
 ## Datastructure for a dataset structure definition (DSD)
@@ -70,6 +85,9 @@ docxml
 
 ##http://technistas.com/2012/06/16/using-rest-apis-from-r-xml-operations/
 #campaignDOM = xmlRoot(xmlTreeParse(db))
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 949d62e9fc93e46690229291286d2c49799689e8

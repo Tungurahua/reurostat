@@ -5,28 +5,42 @@ library(XML)
 library(RCurl)
 library(plyr)
 
-## retrieving data
-u3 <- "http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/cdh_e_fos/..PC.FOS1.BE/?startperiod=2005&endPeriod=2011" 
+## set url
+u <- "http://ec.europa.eu/eurostat/SDMX/diss-web/rest/dataflow/ESTAT/all/latest" 
 
-doc3 <- getURL(u3,httpheader=list('User-Agent'='R'))
-#docxml3 <- xmlParse(doc3)
-#docxml3
-# No success parsing directly to dataframe
-# docdf <- xmlToDataFrame(docxml3)
-# rm(docdf)
+## get xml content
+doc <- getURL(u,httpheader=list('User-Agent'='R'))
 
+## internal tree supposed to be faster
+xmlfile <- xmlInternalTreeParse(doc) 
 
-## xmltreeparse is preferable if you not intend to use xpath (?)
-# the xml file is now saved as an object you can easily work with in R:
-# Use the xmlTreePares-function to parse xml file directly from the web
-#xmlfile <- xmlTreeParse(doc3) 
-xmlfile <- xmlInternalTreeParse(doc3) 
+root <- xmlRoot(xmlfile)
+
+class(root)
+
+names(root)
+names(root[[1]])
+names(root[[2]])
+
 
 # Find node named "generic:ObsValue" anywhere in the tree that has the attribute
 # "value" and get the value of that attribute
-rc = xpathApply(xmlfile, "//generic:ObsValue[@value]", xmlGetAttr, "value")
+codes = xpathSApply(xmlfile, "//str:Dataflow[@id]", xmlGetAttr, "id")
+codes
 
+names_de = xpathSApply(xmlfile, "//com:Name[@xml:lang='de']", xmlValue)
+names_de
+
+ids <- xpathSApply(xmlfile, "")
+
+temp=data.frame(data_id=codes, data_description=names_de)
+
+text_de = xpathSApply
+rc
 # Get a set of nodes
+
+
+
 
 
 

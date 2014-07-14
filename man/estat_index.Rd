@@ -3,14 +3,20 @@
 \alias{estat_index}
 \title{Loads the index of available datasets from Eurostat.}
 \usage{
-estat_index(lang = c("en", "de", "fr"),
+estat_index(lang = c("en", "de", "fr"), online = FALSE,
   url = "http://ec.europa.eu/eurostat/SDMX/diss-web/rest/dataflow/ESTAT/all/latest")
 }
 \arguments{
 \item{lang}{language used to display name of dataflow. \code{en} for english (default),
 \code{de} for german or \code{fr} for french.}
 
-\item{url}{address of the dataflow list (REST)}
+\item{online}{Boolean to indicate if the data should be returned from a
+file included in this package (\code{FALSE}) or if it should be downloaded from
+Eurostat directly (\code{FALSE}). The local file will load faster but might
+be outdated).}
+
+\item{url}{address of the dataflow list (REST). This could be used when Eurostat
+changes the respective address of the REST service}
 }
 \value{
 dataframe with two variables ID and name

@@ -1,65 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-   <soapenv:Envelope
-      xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
       xmlns:web="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/webservices"
       xmlns:mes="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/message"
       xmlns:com="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/common"
       xmlns:quer="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/query">
       <soapenv:Header/>
       <soapenv:Body>
-       <web:GetGenericData>
-         <message:GenericDataQuery
-          xsi:schemaLocation="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/message 
-                    file:/Users/sli/temp/SDMX_2-1_ALL_SECTIONS/
-                    SDMX_2-1_SECTION_3B_SDMX_ML_Schemas_Samples/schemas/SDMXMessage.xsd"
-          xmlns:ns1="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/metadata/structurespecific"
-          xmlns:ns2="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/data/structurespecific"
-          xmlns:ns3="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/common"
-          xmlns:ns4="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/metadata/generic"
-          xmlns:ns5="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/structure"
-          xmlns:ns6="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/registry"
-          xmlns:message="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/message"
-          xmlns:ns8="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/message/footer"
-          xmlns:ns9="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/data/generic"
-          xmlns:ns10="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/query"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <message:Header>
-            <message:ID>ID0</message:ID>
-            <message:Test>false</message:Test>
-            <message:Prepared>2006-05-04T18:13:51.0Z</message:Prepared>
-            <message:Sender id="id0"></message:Sender>
-            <message:Receiver id="id1"></message:Receiver>
-          </message:Header>
-          <message:Query>
-            <ns10:ReturnDetails></ns10:ReturnDetails>
-            <ns10:DataWhere>
-             <ns10:Dataflow>
-               <Ref agencyID="ESTAT" id="cdh_e_fos"/>
-             </ns10:Dataflow>
-             <ns10:TimeDimensionValue>
-               <ns10:ID>TIME_PERIOD</ns10:ID>
-               <ns10:TimeValue operator="greaterThanOrEqual">1989-01</ns10:TimeValue>
-             </ns10:TimeDimensionValue>
-             <ns10:PrimaryMeasureValue>
-               <ns10:NumericValue operator="greaterThanOrEqual">100</ns10:NumericValue>
-             </ns10:PrimaryMeasureValue>
-             <ns10:Or>
-               <ns10:DimensionValue>
-                <ns10:ID>GEO</ns10:ID>
-                <ns10:Value>BE</ns10:Value>
-               </ns10:DimensionValue>
-               <ns10:DimensionValue>
-                <ns10:ID>UNIT</ns10:ID>
-                <ns10:Value>PC</ns10:Value>
-               </ns10:DimensionValue>
-               <ns10:DimensionValue>
-                <ns10:ID>FOS07</ns10:ID>
-                <ns10:Value>FOS1</ns10:Value>
-               </ns10:DimensionValue>
-             </ns10:Or>
-            </ns10:DataWhere>
-          </message:Query>
-         </message:GenericDataQuery>
-       </web:GetGenericData>
+        <web:GetGenericData>
+          <mes:GenericDataQuery>
+            <mes:Header>
+              <mes:ID>ID0</mes:ID>
+              <mes:Test>false</mes:Test>
+              <mes:Prepared>2006-05-04T18:13:51.0Z</mes:Prepared>
+              <mes:Sender id="id0"/>
+              <mes:Receiver id="id1"/>
+            </mes:Header>
+            <mes:Query>
+              <quer:ReturnDetails/>
+              <quer:DataWhere>
+                <quer:Dataflow>
+                  <Ref agencyID="ESTAT" id="bop_euins_q"/>
+                </quer:Dataflow>
+                <quer:DimensionValue>
+                  <quer:ID>POST</quer:ID>
+                  <quer:Value>100</quer:Value>
+                </quer:DimensionValue>
+                <quer:DimensionValue>
+                  <quer:ID>PARTNER</quer:ID>
+                  <quer:Value>EUR</quer:Value>
+                </quer:DimensionValue>
+                <quer:DimensionValue>
+                  <quer:ID>FREQ</quer:ID>
+                  <quer:Value>Q</quer:Value>
+                </quer:DimensionValue>
+                <quer:DimensionValue>
+                  <quer:ID>GEO</quer:ID>
+                  <quer:Value>COMM</quer:Value>
+                </quer:DimensionValue>
+                <quer:TimeDimensionValue>
+                  <quer:ID>TIME_PERIOD</quer:ID>
+                  <quer:TimeValue operator="greaterThanOrEqual"
+                    >2010-01</quer:TimeValue>
+                </quer:TimeDimensionValue>
+              </quer:DataWhere>
+            </mes:Query>
+          </mes:GenericDataQuery>
+        </web:GetGenericData>
       </soapenv:Body>
-    </soapenv:Envelope>
+    </soapenv:Envelope>  

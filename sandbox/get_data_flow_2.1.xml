@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
   <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
     xmlns:web="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/webservices"
     xmlns:mes="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/message"
@@ -26,5 +26,4 @@
         </mes:DataflowQuery>
       </web:GetDataflow>
     </soapenv:Body>
-  </soapenv:Envelope>
-
+   </soapenv:Envelope>

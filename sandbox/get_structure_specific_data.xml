@@ -1,54 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-    xmlns:web="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/webservices"
-    xmlns:mes="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/message"
-    xmlns:com="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/common"
-    xmlns:quer="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/query">
-    <soapenv:Header/>
-    <soapenv:Body>
-     <web:GetStructureSpecificData>
-       <message:StructureSpecificDataQuery
-        <message:Header>
-          <message:ID>ID0</message:ID>
-          <message:Test>false</message:Test>
-          <message:Prepared>2006-05-04</message:Prepared>
-          <message:Sender id="id0"></message:Sender>
-          <message:Receiver id="id1"></message:Receiver>
-        </message:Header>
-        <message:Query>
-          <ns10:ReturnDetails></ns10:ReturnDetails>
-          <ns10:DataWhere>
-           <ns10:Dataflow>
-             <Ref agencyID="ESTAT" id="bop_q_gdp"/>
-           </ns10:Dataflow>
-           <ns10:DimensionValue>
-             <ns10:ID>FLOW</ns10:ID>
-             <ns10:Value>CREDIT</ns10:Value>
-           </ns10:DimensionValue>
-           <ns10:DimensionValue>
-             <ns10:ID>GEO</ns10:ID>
-             <ns10:Value>EU27</ns10:Value>
-           </ns10:DimensionValue>
-           <ns10:DimensionValue>
-             <ns10:ID>PARTNER</ns10:ID>
-             <ns10:Value>EXT_EU27</ns10:Value>
-           </ns10:DimensionValue>
-           <ns10:DimensionValue>
-             <ns10:ID>POST</ns10:ID>
-             <ns10:Value>010</ns10:Value>
-           </ns10:DimensionValue>
-           <ns10:DimensionValue>
-             <ns10:ID>UNIT</ns10:ID>
-             <ns10:Value>PC_GDP</ns10:Value>
-           </ns10:DimensionValue>
-           <ns10:TimeDimensionValue>
-             <ns10:ID>TIME_PERIOD</ns10:ID>
-             <ns10:TimeValue operator="greaterThanOrEqual">1999-01</ns10:TimeValue>
-           </ns10:TimeDimensionValue>
-          </ns10:DataWhere>
-        </message:Query>
-       </message:StructureSpecificDataQuery>
-     </web:GetStructureSpecificData>
-    </soapenv:Body>
-  </soapenv:Envelope>
+<soapenv:Envelope 
+xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:web="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/webservices" 
+xmlns:message="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/message" 
+xmlns:com="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/common" 
+xmlns:quer="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/query">
+ <soapenv:Header/>
+ <soapenv:Body>
+  <web:GetStructureSpecificData>
+   <message:StructureSpecificDataQuery 
+xmlns:ns10="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/query">
+    <message:Header>
+     <message:ID>ID0</message:ID>
+     <message:Test>false</message:Test>
+     <message:Prepared>2006-05-04T18:13:51.0Z</message:Prepared>
+     <message:Sender id="id0"/>
+     <message:Receiver id="id1"/>
+    </message:Header>
+    <message:Query>
+     <ns10:ReturnDetails/>
+     <ns10:DataWhere>
+      <ns10:Dataflow>
+       <Ref agencyID="ESTAT" id="bop_q_gdp"/>
+      </ns10:Dataflow>
+      <ns10:DimensionValue>
+       <ns10:ID>STK_FLOW</ns10:ID>
+       <ns10:Value>NET</ns10:Value>
+      </ns10:DimensionValue>
+      <ns10:DimensionValue>
+       <ns10:ID>GEO</ns10:ID>
+       <ns10:Value>EU27</ns10:Value>
+      </ns10:DimensionValue>
+      <ns10:DimensionValue>
+       <ns10:ID>PARTNER</ns10:ID>
+       <ns10:Value>EXT_EU27</ns10:Value>
+      </ns10:DimensionValue>
+      <ns10:DimensionValue>
+       <ns10:ID>POST</ns10:ID>
+       <ns10:Value>010</ns10:Value>
+      </ns10:DimensionValue>
+      <ns10:DimensionValue>
+       <ns10:ID>UNIT</ns10:ID>
+       <ns10:Value>PC_GDP</ns10:Value>
+      </ns10:DimensionValue>
+      <ns10:TimeDimensionValue>
+       <ns10:ID>TIME_PERIOD</ns10:ID>
+       <ns10:TimeValue operator="greaterThanOrEqual">1999-01</ns10:TimeValue>
+      </ns10:TimeDimensionValue>
+     </ns10:DataWhere>
+    </message:Query>
+   </message:StructureSpecificDataQuery>
+  </web:GetStructureSpecificData>
+ </soapenv:Body>
+</soapenv:Envelope>
 

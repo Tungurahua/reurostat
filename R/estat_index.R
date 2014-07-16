@@ -33,21 +33,21 @@ estat_index <- function(lang = c("en","de","fr"),
                 httpheader=list('User-Agent'='R'))
   }
   
-  
-  
   ## internal tree supposed to be faster according to doc
   xmlfile <- xmlInternalTreeParse(doc) 
   
   ## get the IDs of the dataflows
-  IDs  <-  xpathSApply(xmlfile, "//str:Dataflow[@id]", xmlGetAttr, "id")
-  
-  
+  ids <- xpathSApply(xmlfile, "//str:Dataflow[@id]", xmlGetAttr, "id")
+
+  # Get the associated references to fetch the data structure for a particular set
+  ids_ref <- xpathSApply(xmlfile, "//str:Structure/Ref [@id]", xmlGetAttr, "id")
+
   ## get the names of the dataflows (Language specified in 'lang')
   xpath <- paste0("//com:Name[@xml:lang='",lang,"']")
-  names <-  xpathSApply(xmlfile, xpath , xmlValue)
+  description <- xpathSApply(xmlfile, xpath , xmlValue)
   
   # bind it all into a dataframe and return the result
-  temp <- data.frame(data_id=IDs, data_description=names)
+  temp <- data.frame(data_id=ids, data_ref=ids_ref, data_description=description)
   return(temp)
 }
 

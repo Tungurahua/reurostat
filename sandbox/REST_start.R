@@ -1,15 +1,11 @@
 library(RCurl)
 library(XML)
-<<<<<<< HEAD
 library(plyr)
 library(dplyr)
-=======
->>>>>>> 949d62e9fc93e46690229291286d2c49799689e8
 
 # This script implements the example REST calls from the Eurostat website
 #
 # http://epp.eurostat.ec.europa.eu/portal/page/portal/sdmx_web_services/getting_started/rest_sdmx_2.1#ind_20_1
-<<<<<<< HEAD
 
 fetch_eustat_dataflow=function(){
 		## Dataflow of available datasets
@@ -24,7 +20,6 @@ fetch_eustat_dataflow=function(){
 }
 
 docxml=fetch_eustat_dataflow()
-
 
 create_user_dataflow=function(lang, eurostat_data_flow){
 		descriptions=getNodeSet(docxml, paste0("//str:Dataflow/com:Name [@xml:lang=", lang, "]")) %>%
@@ -48,12 +43,17 @@ eu_stat_ref=lapply(languages, create_user_dataflow)
 names(eu_stat_ref)=languages
 
 
+temp=estat_index()
+
+ids <- xpathSApply(docxml, "//str:Dataflow [@id]", xmlGetAttr, "id")
+query_date=xpathSApply(docxml, "//mes:Prepared", xmlValue)
+query_date=xpathSApply(docxml, "//mes:ID", xmlValue)
+
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-=======
 #
 # !! If a HTML redirect message is returned, you probably need to strip the 
 # "www" from the beginning of the URL
@@ -63,11 +63,10 @@ names(eu_stat_ref)=languages
 u1 <- "http://ec.europa.eu/eurostat/SDMX/diss-web/rest/dataflow/ESTAT/all/latest" 
 
 doc1 <- getURL(u1,httpheader=list('User-Agent'='R'))
->>>>>>> 949d62e9fc93e46690229291286d2c49799689e8
 
 
 ## Datastructure for a dataset structure definition (DSD)
-u2 <- "http://ec.europa.eu/eurostat/SDMX/diss-web/rest/datastructure/ESTAT/DSD_nama_gdp_c" 
+u2 <- "http://ec.europa.eu/eurostat/SDMX/diss-web/rest/datastructure/ESTAT/DSD_cdh_e_fos" 
 
 doc2 <- getURL(u2,httpheader=list('User-Agent'='R'))
 
@@ -75,19 +74,12 @@ docxml2 <- xmlParse(doc2)
 docxml2
 
 ## retrieving data
-u3 <- "http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/cdh_e_fos/..PC.FOS1.BE/?startperiod=2005&endPeriod=2011" 
+u3 <- "http://ec.europa.eu/eurostat/SDMX/diss-web/rest/data/cdh_e_fos/..PC.FOS1.BE+DE/?startperiod=2005&endPeriod=2011" 
 
 doc3 <- getURL(u3,httpheader=list('User-Agent'='R'))
 docxml <- xmlParse(doc3)
 docxml
 
 
-
 ##http://technistas.com/2012/06/16/using-rest-apis-from-r-xml-operations/
 #campaignDOM = xmlRoot(xmlTreeParse(db))
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 949d62e9fc93e46690229291286d2c49799689e8

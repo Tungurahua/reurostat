@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+  <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:web="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/webservices"
+    xmlns:mes="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/message"
+    xmlns:com="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/common"
+    xmlns:quer="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/query">
+    <soapenv:Header/>
+    <soapenv:Body>
+      <web:GetDataStructure>
+        <mes:DataStructureQuery>
+          <mes:Header>
+            <mes:ID>"MESSAGE_ID"</mes:ID>
+            <mes:Test>false</mes:Test>
+            <mes:Prepared>2013-04-08</mes:Prepared>
+            <mes:Sender id="SENDER"/>
+            <mes:Receiver id="ESTAT"/>
+          </mes:Header>
+          <mes:Query>
+            <quer:ReturnDetails>
+              <quer:References>
+                <quer:All/>
+              </quer:References>
+            </quer:ReturnDetails>
+            <quer:ID>DSD_cens_01nactz</quer:ID>
+          </mes:Query>
+        </mes:DataStructureQuery>
+      </web:GetDataStructure>
+    </soapenv:Body>
+  </soapenv:Envelope> 
